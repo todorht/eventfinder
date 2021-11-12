@@ -1,41 +1,37 @@
-package mk.eventfinder.location.application.pipe;
+package mk.eventfinder.location.infrastrucure.pipe;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mk.eventfinder.location.application.pipe.response.FGoogleResponse;
-import mk.eventfinder.location.domain.model.Location;
-import org.bson.json.JsonObject;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
+import mk.eventfinder.location.infrastrucure.pipe.vto.GoogleLocation;
+import mk.eventfinder.location.infrastrucure.pipe.vto.GoogleResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriBuilderFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.annotation.PostConstruct;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 
 
 @Service
-public class GoogleClient {
+public class PlaceReader {
 
     public static String placesUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.998328,%2021.417523&radius=50500&type=stadium&key=AIzaSyAqsJ2jyqHJC9H5dZeUnuHeiypl7v5yMhI";
     private final RestTemplate restTemplate;
+    private GoogleResponse googleResponse;
 
-    public GoogleClient(RestTemplate restTemplate) {
+    public PlaceReader(RestTemplate restTemplate) {
+        this.googleResponse = null;
         this.restTemplate = restTemplate;
         var requestFactory = new SimpleClientHttpRequestFactory();
         this.restTemplate.setRequestFactory(requestFactory);
     }
 
 
-    public List<Location> findLocation(){
+    public GoogleLocation[] getResource(){
 
         HttpClient client = HttpClient.newBuilder().build();
 
@@ -50,13 +46,18 @@ public class GoogleClient {
             response = client.send(request,HttpResponse.BodyHandlers.ofString()) ;
 
             ObjectMapper objectMapper = new ObjectMapper();
-            FGoogleResponse googleResponse = objectMapper.readValue(response.body(), new TypeReference<FGoogleResponse>() {});
-            System.out.println(googleResponse.getNext_page_token());
-
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            this.googleResponse = objectMapper.readValue(response.body(), GoogleResponse.class);
+            return this.googleResponse.getResults();
         } catch (Exception e) {
-            System.out.println(e.getMessage());;
+            System.out.println(e.getMessage());
         }
-        return Collections.emptyList();
+        return null;
+    }
+
+    public GoogleLocation[] getGoogleResponse(){
+            return this.getResource();
+//       return Arrays.stream(this.getResource().getResults()).findFirst().get();
     }
 
     private UriComponentsBuilder uri() {

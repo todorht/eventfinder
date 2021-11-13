@@ -1,12 +1,10 @@
-package mk.eventfinder.location.infrastrucure.pipe.vto;
+package mk.eventfinder.location.infrastrucure.filter.vto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
 
 @Getter
 @Setter

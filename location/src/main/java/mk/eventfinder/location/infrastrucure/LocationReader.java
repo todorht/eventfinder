@@ -1,17 +1,16 @@
-package mk.eventfinder.location.infrastrucure.pipe;
+package mk.eventfinder.location.infrastrucure;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mk.eventfinder.location.domain.model.Location;
-import mk.eventfinder.location.infrastrucure.pipe.vto.GoogleLocation;
-import mk.eventfinder.location.infrastrucure.pipe.vto.LocationDetails;
-import mk.eventfinder.location.infrastrucure.pipe.vto.LocationDetailsResponse;
-import mk.eventfinder.location.infrastrucure.pipe.vto.LocationResponse;
+import mk.eventfinder.location.infrastrucure.filter.vto.GoogleLocation;
+import mk.eventfinder.location.infrastrucure.filter.vto.LocationDetails;
+import mk.eventfinder.location.infrastrucure.filter.vto.LocationDetailsResponse;
+import mk.eventfinder.location.infrastrucure.filter.vto.LocationResponse;
 
 import mk.eventfinder.location.infrastrucure.repository.LocationRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -66,7 +65,6 @@ public class LocationReader {
         } else {
             stringBuilder = new StringBuilder(placesUrl + googleApiKey).append("&pagetoken=");
         }
-
 
         try {
             this.response = this.httpClient.send(this.getJsonResultFromUrl(stringBuilder.toString()), HttpResponse.BodyHandlers.ofString());

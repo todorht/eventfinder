@@ -1,4 +1,4 @@
-package mk.eventfinder.location.infrastrucure.pipe.vto;
+package mk.eventfinder.location.infrastrucure.filter.vto;
 
 import lombok.*;
 

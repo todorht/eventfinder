@@ -10,6 +10,7 @@
     <version>0.1</version>
     <modules>
         <module>shared_kernel</module>
+        <module>location</module>
     </modules>
 
     <properties>

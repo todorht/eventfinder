@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GoogleResponse implements Serializable {
+public class LocationResponse {
 
     @JsonIgnore
     String[] html_attributions;
@@ -20,4 +20,5 @@ public class GoogleResponse implements Serializable {
     GoogleLocation[] results;
     String status;
 }
+
 

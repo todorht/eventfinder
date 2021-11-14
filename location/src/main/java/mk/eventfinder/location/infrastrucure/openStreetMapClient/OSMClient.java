@@ -12,12 +12,12 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 @Service
-public class OpenStreetMapClient {
+public class OSMClient {
     private final String uri = "https://api.openstreetmap.org/api/0.6/map?bbox=21.3870,41.9959,21.4125,42.0068";
 
     private final HttpClient httpClient;
     private ObjectMapper om;
-    public OpenStreetMapClient(HttpClient httpClient) {
+    public OSMClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         this.om = new ObjectMapper();
         om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

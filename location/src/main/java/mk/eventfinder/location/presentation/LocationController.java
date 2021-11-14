@@ -2,7 +2,6 @@ package mk.eventfinder.location.presentation;
 
 import mk.eventfinder.location.domain.model.Location;
 import mk.eventfinder.location.domain.model.exception.LocationNotFoundException;
-import mk.eventfinder.location.infrastrucure.LocationReader;
 
 import mk.eventfinder.location.infrastrucure.repository.LocationRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +15,9 @@ import java.util.List;
 @RequestMapping("/api/location")
 public class LocationController {
 
-    private final LocationReader placeReader;
     private final LocationRepository locationRepository;
 
-    public LocationController(LocationReader placeReader, LocationRepository locationRepository) {
-        this.placeReader = placeReader;
+    public LocationController( LocationRepository locationRepository) {
         this.locationRepository = locationRepository;
     }
 
@@ -33,5 +30,6 @@ public class LocationController {
     Location getLocation(@PathVariable String locationId){
         return this.locationRepository.findById(locationId).orElseThrow(LocationNotFoundException::new);
     }
+
 
 }

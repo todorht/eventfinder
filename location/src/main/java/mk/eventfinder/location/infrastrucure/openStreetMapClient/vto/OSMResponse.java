@@ -10,5 +10,5 @@ import java.util.Collection;
 @NoArgsConstructor
 @Data
 public class OSMResponse {
-    Collection<Node> elements;
+    Collection<Element> elements;
 }

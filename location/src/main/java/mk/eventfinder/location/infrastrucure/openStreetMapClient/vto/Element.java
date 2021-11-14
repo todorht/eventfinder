@@ -9,7 +9,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Node {
+public class Element {
     String type;
     Long id;
     Long uid;
@@ -17,13 +17,4 @@ public class Node {
     Double lon;
     String user;
     Object tags;
-}
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-class Tags{
-//   String addr:city;
-   String v;
-
 }

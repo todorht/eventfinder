@@ -1,29 +1,29 @@
-package mk.eventfinder.location.infrastrucure.openStreetMapClient.vto;
+package mk.eventfinder.location.infrastrucure.OSM.vto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mk.eventfinder.location.application.vto.ValueObject;
-import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Data
+@Getter
 public class Element extends ValueObject {
+
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
 
     String type;
+
     long uid;
+
     double lat;
+
     double lon;
-    String user;
+
     @Embedded
     Tags tags;
 

@@ -1,4 +1,4 @@
-package mk.eventfinder.location.infrastrucure.openStreetMapClient;
+package mk.eventfinder.location.infrastrucure.OSM;
 
 public enum AmenityTypes {
     ARTS_CENTRE("arts_centre"),

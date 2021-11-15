@@ -2,6 +2,7 @@ package mk.eventfinder.location.infrastrucure.openStreetMapClient;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import mk.eventfinder.location.application.Pipe;
 import mk.eventfinder.location.infrastrucure.openStreetMapClient.vto.OSMResponse;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,12 @@ public class OSMClient {
 
     private final HttpClient httpClient;
     private ObjectMapper om;
-    public OSMClient(HttpClient httpClient) {
+    private final Pipe pipe;
+
+
+    public OSMClient(HttpClient httpClient, Pipe pipe) {
         this.httpClient = httpClient;
+        this.pipe = pipe;
         this.om = new ObjectMapper();
         om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         om.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true); // za tagovite da ne pravi problem so nekoj jsontoken
@@ -38,7 +43,7 @@ public class OSMClient {
                     .build(), HttpResponse.BodyHandlers.ofString());
             OSMResponse osmResponse = om.readValue(response.body(),OSMResponse.class);
 
-            System.out.println(osmResponse.getElements());
+            pipe.start(osmResponse.getElements());
         } catch (Exception e) {
             e.printStackTrace();
         }

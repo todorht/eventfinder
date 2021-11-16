@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Getter
-public class Element extends ValueObject {
+public class Element {
 
     @Id
     @Column(name = "id", nullable = false)
@@ -24,7 +24,17 @@ public class Element extends ValueObject {
 
     double lon;
 
-    @Embedded
     Tags tags;
 
+    @Override
+    public String toString() {
+        return "Element{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", uid=" + uid +
+                ", lat=" + lat +
+                ", lon=" + lon +
+                ", tags=" + tags +
+                '}';
+    }
 }

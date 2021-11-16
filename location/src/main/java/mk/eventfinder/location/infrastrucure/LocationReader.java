@@ -9,7 +9,7 @@
 //import mk.eventfinder.location.infrastrucure.filter.vto.LocationDetailsResponse;
 //import mk.eventfinder.location.infrastrucure.filter.vto.LocationResponse;
 //
-//import mk.eventfinder.location.domain.repository.LocationRepository;
+//import mk.eventfinder.location.infrastrucure.repository.LocationRepository;
 //import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.stereotype.Service;
 //

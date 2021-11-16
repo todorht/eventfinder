@@ -2,8 +2,9 @@ package mk.eventfinder.location.domain.service;
 
 import Repository.IService;
 import mk.eventfinder.location.domain.model.Location;
-import mk.eventfinder.location.domain.repository.LocationRepository;
+import mk.eventfinder.location.infrastrucure.repository.LocationRepository;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;

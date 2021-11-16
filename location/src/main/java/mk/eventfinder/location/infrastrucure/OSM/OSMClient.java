@@ -2,11 +2,10 @@ package mk.eventfinder.location.infrastrucure.OSM;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.istack.Nullable;
+
 import mk.eventfinder.location.application.Pipe;
 import mk.eventfinder.location.infrastrucure.OSM.vto.Element;
 import mk.eventfinder.location.infrastrucure.OSM.vto.OSMResponse;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -17,7 +16,6 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class OSMClient {
@@ -45,7 +43,7 @@ public class OSMClient {
     private List<HttpRequest> getRequests() {
         List<HttpRequest> urls = new ArrayList<>();
         for (AmenityTypes type : AmenityTypes.values()) {
-            var url = OSMApi + String.format("?data=[out:json];node[amenity=%s](40.9980,20.4146,42.0035,21.4300);out%%20meta;",type.value);
+            var url = OSMApi + String.format("?data=[out:json];node[amenity=%s](40.9980,20.4146,42.0035,21.4300);out%%20meta;", type.value);
             urls.add(HttpRequest.newBuilder()
                     .header("accept", "application/json")
                     .uri(URI.create(url))
@@ -54,13 +52,13 @@ public class OSMClient {
         return urls;
     }
 
-    private Collection<Element> getElements(HttpRequest request){
+    private Collection<Element> getElements(HttpRequest request) {
         HttpResponse<String> response;
         OSMResponse osmResponse;
         try {
             response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if(response.statusCode()!=200) {
+            if (response.statusCode() != 200) {
                 System.out.println(request.uri());
                 System.out.println(response.statusCode());
                 this.failedRequests.add(request);
@@ -77,9 +75,9 @@ public class OSMClient {
     }
 
     private void getResources() {
-
-            Collection<Element> elements = getElements(getRequests().get(0));
-            if(elements != null){
+        for (HttpRequest request : getRequests()) {
+            Collection<Element> elements = getElements(request);
+            if (elements != null) {
                 elements.forEach(pipe::add);
             }
             try {
@@ -87,7 +85,7 @@ public class OSMClient {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+        }
         System.out.println("GOTONO");
         pipe.start();
     }

@@ -5,12 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
-
 @NoArgsConstructor
 @AllArgsConstructor
-@Embeddable
 @Getter
 public class Tags {
 

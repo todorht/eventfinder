@@ -29,9 +29,9 @@ public class Pipe {
            Element element = elementList.poll();
            Location location = new Location();
 
-           if (!filter.isNull(element.getTags().getName())){
+           if (filter.isNull(element.getTags().getName())){
                location.setName(element.getTags().getName());
-           } else if(!filter.isNull(element.getTags().getName_en())){
+           } else if(filter.isNull(element.getTags().getName_en())){
                location.setName(element.getTags().getName_en());
            } else {
                continue;
@@ -39,30 +39,32 @@ public class Pipe {
 
            location.setId(element.getId());
 
-           if(!filter.isNull(element.getTags().getCity())){
+           if(filter.isNull(element.getTags().getCity())){
                location.setCity(element.getTags().getCity());
-           }else if(!filter.isNull(element.getTags().getCity_en())){
+           }else if(filter.isNull(element.getTags().getCity_en())){
                location.setCity(element.getTags().getCity_en());
            }else{
                location.setCity("Skopje");
            }
 
-            if(!filter.isNull(element.getTags().getCountry())){
+            if(filter.isNull(element.getTags().getCountry())){
                 location.setCountry(element.getTags().getCountry());
             }else{
                 location.setCountry("MK");
             }
 
-            if(!filter.isNull(element.getTags().getStreet())){
+            if(filter.isNull(element.getTags().getStreet())){
                 location.setAddress(element.getTags().getStreet());
-            }else if(!filter.isNull(element.getTags().getCity_en())){
+            }else if(filter.isNull(element.getTags().getCity_en())){
                 location.setAddress(element.getTags().getStreet_en());
             }
 
             location.setLongitude(element.getLon());
             location.setLatitude(element.getLat());
 
-            this.locationService.save(location);
+            if(location.getName()!=null) {
+                this.locationService.save(location);
+            }
 
         }
 

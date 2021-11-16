@@ -1,15 +1,16 @@
 package mk.eventfinder.location.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Location {
 
     @Id

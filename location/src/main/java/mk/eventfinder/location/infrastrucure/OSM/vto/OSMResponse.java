@@ -1,14 +1,14 @@
-package mk.eventfinder.location.infrastrucure.openStreetMapClient.vto;
+package mk.eventfinder.location.infrastrucure.OSM.vto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Collection;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
 public class OSMResponse {
     Collection<Element> elements;
 }

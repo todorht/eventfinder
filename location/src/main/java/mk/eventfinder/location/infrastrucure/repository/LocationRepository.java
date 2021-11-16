@@ -1,7 +1,9 @@
 package mk.eventfinder.location.infrastrucure.repository;
 
-import Repository.GenericRepository;
 import mk.eventfinder.location.domain.model.Location;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface LocationRepository extends GenericRepository<Location, String> {
+@Repository
+public interface LocationRepository extends MongoRepository<Location, Long> {
 }

@@ -15,6 +15,8 @@ public class GatewayConfig {
         return builder.routes()
                 .route(r -> r.path("/api/location/**")
                         .uri("lb://LOCATION-SERVICE"))
+                .route(r-> r.path("/api/event/**")
+                    .uri("lb://EVENT-SERVICE"))
                 .build();
     }
 }

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,5 +29,6 @@ public class Location {
     private double latitude;
     @JsonProperty
     private double longitude;
-
+    @JsonProperty
+    private List<Long> events;
 }

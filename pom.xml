@@ -11,6 +11,8 @@
     <modules>
         <module>shared_kernel</module>
         <module>location</module>
+        <module>gateway-service</module>
+        <module>service-registry</module>
     </modules>
 
     <properties>

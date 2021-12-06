@@ -1,6 +1,10 @@
 package Repository;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.NoRepositoryBean;
+
 import java.io.Serializable;
 
-public class GenericRepository<T, ID extends Serializable>  {
+@NoRepositoryBean
+public interface GenericRepository<T, ID extends Serializable> extends MongoRepository<T, ID> {
 }

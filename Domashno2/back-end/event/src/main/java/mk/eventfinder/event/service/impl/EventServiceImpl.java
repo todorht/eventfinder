@@ -52,7 +52,6 @@ public class EventServiceImpl implements EventService {
         event.addComment(comment);
         this.commentRepository.save(comment);
         this.save(event);
-
     }
 
     @Override

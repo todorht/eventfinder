@@ -7,12 +7,11 @@ import com.eventsfinder.event.service.EventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.GeneratedValue;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/events")
 public class EventController {
     private final EventService eventService;
 
@@ -20,7 +19,7 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @GetMapping("/events")
+    @GetMapping
     public List<Event> getEvents(){
         return this.eventService.findAll();
     }

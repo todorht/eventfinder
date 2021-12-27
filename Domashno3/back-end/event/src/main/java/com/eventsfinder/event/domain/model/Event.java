@@ -28,6 +28,7 @@ public class Event {
     @JsonProperty
     //change name
     private String createdByUser;
+    @Embedded
     private EventInformation information;
     @OneToMany
     private List<Comment> comments;

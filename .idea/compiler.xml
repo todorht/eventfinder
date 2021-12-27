@@ -8,8 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="location" />
         <module name="shared_kernel" />
-        <module name="gateway-service" />
         <module name="service-registry" />
+        <module name="gateway-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

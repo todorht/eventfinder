@@ -1,5 +1,6 @@
 package com.eventsfinder.user.security;
 
+import com.eventsfinder.user.application.service.UserService;
 import com.eventsfinder.user.jwt.JwtConfig;
 import com.eventsfinder.user.jwt.JwtTokenVerifier;
 import com.eventsfinder.user.jwt.CustomAuthenticationFilter;
@@ -29,6 +30,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
+    private final UserService userService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -39,7 +41,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager(), jwtConfig, secretKey);
+        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager(), jwtConfig, secretKey, userService);
         customAuthenticationFilter.setFilterProcessesUrl("/api/login");
         http
                 .csrf().disable()

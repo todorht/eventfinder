@@ -2,6 +2,8 @@ package com.eventsfinder.user.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.eventsfinder.user.application.service.UserService;
+import com.eventsfinder.user.domain.model.ApplicationUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
@@ -32,6 +34,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     private final AuthenticationManager authenticationManager;
     private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
+    private final UserService userService;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -58,9 +61,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
         User user = (User) authentication.getPrincipal();
 
+        ApplicationUser applicationUser = userService.getUser(user.getUsername());
+
         Algorithm algorithm = Algorithm.HMAC256(jwtConfig.getSecretKey().getBytes());
 
-        // one way of creating tokens
+        // one way of creating headers
 
         String access_token = JWT.create()
                 .withSubject(user.getUsername())
@@ -78,12 +83,14 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 //        response.setHeader("access_token", access_token);
 //        response.setHeader("refresh_token", refresh_token);
 
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put("access_token", access_token);
-        tokens.put("refresh_token", refresh_token);
+        Map<String, String> headers = new HashMap<>();
+        headers.put("access_token", access_token);
+        headers.put("refresh_token", refresh_token);
+        headers.put("userId", applicationUser.getUserId().toString());
+        headers.put("username", user.getUsername());
 
         response.setContentType(APPLICATION_JSON_VALUE);
-        new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+        new ObjectMapper().writeValue(response.getOutputStream(), headers);
 
         /* another way of creating a token
 

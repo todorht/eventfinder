@@ -3,6 +3,7 @@ package com.eventsfinder.user.api;
 import com.eventsfinder.user.application.service.UserService;
 import com.eventsfinder.user.domain.model.ApplicationRole;
 import com.eventsfinder.user.domain.model.ApplicationUser;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +18,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserResource {
 
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/users")
     public ResponseEntity<List<ApplicationUser>> getUsers() {
         return ResponseEntity
                 .ok()
-                .body(userService.getUsers());
+                .body(this.userService.getUsers());
     }
 
     @PostMapping("/user/save")
@@ -32,7 +33,7 @@ public class UserResource {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity
                 .created(uri)
-                .body(userService.saveUser(user));
+                .body(this.userService.saveUser(user));
     }
 
     @PostMapping("/role/save")
@@ -41,7 +42,7 @@ public class UserResource {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
         return ResponseEntity
                 .created(uri)
-                .body(userService.saveRole(role));
+                .body(this.userService.saveRole(role));
     }
 
     @PostMapping("/role/addtouser")

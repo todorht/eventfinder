@@ -1,0 +1,15 @@
+<div>
+  <span>{{title}}</span>
+  <div>
+  <input placeholder="Pick Date" [nbDatepicker]="formcontrol" />
+  <nb-datepicker #formcontrol></nb-datepicker>
+  </div>
+  <div>
+  <input type="text" [nbTimepicker]="timepicker" />
+  <nb-timepicker
+    #timepicker="nbTimepicker"
+    singleColumn
+    [step]="10"
+  ></nb-timepicker>
+</div>
+</div>

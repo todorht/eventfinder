@@ -1,0 +1,162 @@
+<div class="main-div">
+  <nb-card>
+    <nb-card-header>
+      <h3>{{ newEvent ? "Create new event" : "Edit event" }}</h3>
+    </nb-card-header>
+    <nb-card-body>
+      <form (ngSubmit)="onSubmit(eventForm.value)" formGroup="eventForm">
+        <div>
+          <div>Enter event name</div>
+          <input
+            name="name"
+            class="input-full-width size-medium status-basic shape-rectangle ng-untouched ng-pristine ng-invalid nb-transition"
+            required=""
+            minlength="4"
+            maxlength="50"
+          />
+          <app-date-time-picker title="Starts at" ></app-date-time-picker>
+          <app-date-time-picker title="Ends in"></app-date-time-picker>
+        </div>
+        <br />
+        <!-- <img
+        *ngIf="!newEvent"
+        mat-card-image
+        [src]=" | safeImageUrl"
+        class="bigger-image"
+      /> -->
+
+        <app-image
+          mat-card-image
+          *ngIf="newEvent"
+          [newEvent]="newEvent"
+          (sendImage)="saveImage($event)"
+        ></app-image>
+
+        <br />
+        <div>
+          <div for="description">Description</div>
+          <textarea
+            ngModel
+            type="description"
+            name="description"
+            class="form-control"
+            rows="5"
+            [value]=""
+          ></textarea>
+        </div>
+        <div class="sub-form" formGroup="'contact'">
+          <span>Contact information</span>
+          <div>
+            <span>Contact name: </span>
+            <input
+              type="text"
+              [value]="this.eventForm.get('contact')?.get('contactName')?.value"
+              placeholder="Enter name"
+              nameOfFormControl="contactName"
+            />
+          </div>
+          <div>
+            <span>Enter phone number: </span>
+            <input
+              type="text"
+              [value]="this.eventForm.get('contact')?.get('phoneNumber')?.value"
+              placeholder="Enter number"
+              nameOfFormControl="phoneNumber"
+            />
+          </div>
+          <div>
+            <span>Email: </span>
+            <input
+              type="text"
+              [value]="this.eventForm.get('contact')?.get('email')?.value"
+              placeholder="Enter email"
+              nameOfFormControl="email"
+            />
+          </div>
+        </div>
+        <div class="sub-form">
+          <nb-toggle (checkedChange)="onlineCheck()" nameOfFormControl="isOnline">Is online?</nb-toggle>
+        </div>
+        <div *ngIf="this.eventForm.get('isOnline')?.value" class="sub-form" formGroup="'location'">
+          <span>Link: </span>
+            <input
+              type="text"
+              [value]="this.eventForm.get('location')?.get('link')?.value"
+              placeholder="Enter link"
+              nameOfFormControl="link"
+            />
+        </div>
+        <div *ngIf="!this.eventForm.get('isOnline')?.value" class="sub-form" formGroup="'location'">
+          <span>Create location </span>
+          <div class="row">
+            <div class="inline" formGroup="'address'">
+              <div>
+                <span>Location name: </span>
+                <input
+                  type="text"
+                  [value]="
+                    this.eventForm
+                      .get('location')
+                      ?.get('address')
+                      ?.get('location')?.value
+                  "
+                  placeholder="Enter name"
+                  nameOfFormControl="locationName"
+                />
+              </div>
+              <div>
+                <span>Country: </span>
+                <input
+                  type="text"
+                  [value]="
+                    this.eventForm
+                      .get('location')
+                      ?.get('address')
+                      ?.get('country')?.value
+                  "
+                  placeholder="Select country"
+                  nameOfFormControl="country"
+                />
+              </div>
+              <div>
+                <span>City: </span>
+                <input
+                  type="text"
+                  [value]="
+                    this.eventForm.get('location')?.get('address')?.get('city')
+                      ?.value
+                  "
+                  placeholder="Select city"
+                  nameOfFormControl="city"
+                />
+              </div>
+              <div>
+                <span>Street: </span>
+                <input
+                  type="text"
+                  [value]="
+                    this.eventForm.get('location')?.get('address')?.get('road')
+                      ?.value
+                  "
+                  placeholder="Hit the road"
+                  nameOfFormControl="road"
+                />
+              </div>
+            </div>
+            <div>
+              <app-osm-view
+                (addressChanged)="onAddressChange($event)"
+              ></app-osm-view>
+            </div>
+          </div>
+        </div>
+        <button nbButton type="submit">
+          <nb-icon icon="done-all-outline">done-all-outline</nb-icon>Confirm
+        </button>
+      </form>
+      <button nbButton (click)="cancel()" type="reset">
+        <nb-icon icon="close-circle-outline"></nb-icon>Cancel
+      </button>
+    </nb-card-body>
+  </nb-card>
+</div>

@@ -1,0 +1,32 @@
+<nb-card>
+  <nb-card-header class="header">
+    <div class="name-badges">
+     <span>{{ event?.name }}Event's name</span>
+     <nb-icon *ngIf="event?.isOnline" icon="globe-outline"></nb-icon>
+    </div>
+    <div class="close-icon">
+        <nb-icon icon="close-outline"></nb-icon>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="container">
+      <div class="event-info">
+        <div class="name-badges">
+        </div>
+      </div>
+      <img class="event-image" [src]="event?.base64image" [alt]="event?.name" />
+      <div class="row">
+        <div>
+          <span>Date:</span>
+          <span>Time:</span>
+        </div>
+        <div class="col-md-6">
+            <strong>Address:</strong><br />
+            <div>{{ event?.location?.address }} street</div><br />
+            <div>{{ event?.location?.address?.city }}c,c {{ event?.location?.address?.country }}</div>
+        </div>
+      </div>
+      <app-comment></app-comment>
+    </div>
+  </nb-card-body>
+</nb-card>

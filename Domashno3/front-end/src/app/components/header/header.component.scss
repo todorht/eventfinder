@@ -1,0 +1,16 @@
+.profile{
+  display: flex;
+  position: relative;
+  width: 200px;
+}
+
+nb-user{
+  float: right;
+  display: inline;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

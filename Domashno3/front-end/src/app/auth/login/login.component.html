@@ -1,0 +1,17 @@
+
+    <h1 id="title" class="title">Sign In</h1>
+    <form  #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" aria-labelledby="title" class="ng-untouched ng-pristine ng-invalid">
+      <div class="form-control-group">
+        <label for="input-email" class="label">Email address: </label>
+        <input (ngModel)="username" class="form-control" nbinput="" fullwidth="" name="email" id="input-email" placeholder="Email address" autofocus="" class="input-full-width size-medium status-basic shape-rectangle ng-untouched ng-pristine ng-invalid nb-transition" required>
+      </div>
+      <div class="form-control-group">
+        <label for="input-password" class="label">Password:</label>
+        <input (ngModel)="password" class="form-control" nbinput="" fullwidth="" name="password" type="password" id="input-password" placeholder="Password" class="input-full-width size-medium status-basic shape-rectangle ng-untouched ng-pristine ng-invalid nb-transition" required minlength="4" maxlength="50">
+      </div>
+      <button nbButton type="submit" [disabled]="loginForm.invalid" status="success" tabindex="-1" class="status-success appearance-filled full-width size-medium shape-rectangle nb-transition"> Sign In </button>
+    </form>
+    <section aria-label="Register" class="another-action"> Don't have an account?
+        <a routerlink="../register" class="text-link" href="/nebular/example/smart-home/auth/register">Sign Up</a>
+    </section>
+

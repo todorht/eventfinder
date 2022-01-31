@@ -4,23 +4,32 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
 @AllArgsConstructor
 @Embeddable
 @NoArgsConstructor
 public class Location {
     @JsonProperty
-    private Long locationId;
+    public Long locationId;
+    @Embedded
+    public Address address;
     @JsonProperty
-    private String country;
+    public double latitude;
     @JsonProperty
-    private String city;
+    public double longitude;
+    public String locationName;
+}
+
+@Embeddable
+class Address{
     @JsonProperty
-    private String address;
+    @Column(name = "loc_address")
+    public String country;
     @JsonProperty
-    private double latitude;
+    public String city;
     @JsonProperty
-    private double longitude;
-    private String locationName;
-    private String link;
+    public String address;
 }

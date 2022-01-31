@@ -1,6 +1,6 @@
 package com.eventsfinder.event.repository;
 
-import com.eventsfinder.event.domain.model.Comment;
+import com.eventsfinder.event.domain.model.comment.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

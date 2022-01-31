@@ -8,9 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="events-finder" />
+        <module name="gateway-service" />
         <module name="location" />
         <module name="event" />
+        <module name="back-end" />
         <module name="user" />
+        <module name="service-registry" />
         <module name="eventsfinder" />
       </profile>
     </annotationProcessing>
@@ -18,7 +21,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="event" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
       <module name="location" options="-parameters" />
+      <module name="service-registry" options="-parameters" />
       <module name="user" options="-parameters" />
     </option>
   </component>

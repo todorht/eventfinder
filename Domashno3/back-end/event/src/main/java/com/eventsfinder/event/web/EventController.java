@@ -1,8 +1,9 @@
 package com.eventsfinder.event.web;
 
 import com.eventsfinder.event.domain.enumerations.Category;
-import com.eventsfinder.event.domain.model.Comment;
-import com.eventsfinder.event.domain.model.Event;
+import com.eventsfinder.event.domain.model.comment.Comment;
+import com.eventsfinder.event.domain.model.event.Event;
+import com.eventsfinder.event.dto.EventDto;
 import com.eventsfinder.event.service.EventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,12 +37,12 @@ public class EventController {
     }
 
     @PatchMapping("/edit/{eventId}")
-    public void editEvent(@PathVariable Long eventId, @RequestBody Event event){
-        this.eventService.editEvent(eventId,event);
+    public void editEvent(@PathVariable Long eventId, @RequestBody EventDto event){
+        this.eventService.editEvent(event);
     }
 
     @PostMapping("/add")
-    public void addEvent(@RequestBody Event event)
+    public void addEvent(@RequestBody EventDto event)
     {
         this.eventService.save(event);
     }
@@ -51,28 +52,28 @@ public class EventController {
         this.eventService.addComment(eventId, comment);
     }
 
-    @GetMapping("/byCategory")
-    public List<Event> findByCategory(@RequestParam Category category)
-    {
-        return this.eventService.findByCategory(category);
-    }
+//    @GetMapping("/byCategory")
+//    public List<Event> findByCategory(@RequestParam Category category)
+//    {
+//        return this.eventService.findByCategory(category);
+//    }
 
-    @GetMapping("/byCountry")
-    public List<Event> findByCountry(@RequestParam String country)
-    {
-        return this.eventService.findAllByCountry(country);
-    }
-
-    @GetMapping("/byCity")
-    public List<Event> findByCity(@RequestParam String city)
-    {
-        return this.eventService.findAllByCity(city);
-    }
-
-      @GetMapping("/byAddress")
-    public List<Event> findByAddress(@RequestParam String address)
-    {
-        return this.eventService.findAllByAddress(address);
-    }
+//    @GetMapping("/byCountry")
+//    public List<Event> findByCountry(@RequestParam String country)
+//    {
+//        return this.eventService.findAllByCountry(country);
+//    }
+//
+//    @GetMapping("/byCity")
+//    public List<Event> findByCity(@RequestParam String city)
+//    {
+//        return this.eventService.findAllByCity(city);
+//    }
+//
+//      @GetMapping("/byAddress")
+//    public List<Event> findByAddress(@RequestParam String address)
+//    {
+//        return this.eventService.findAllByAddress(address);
+//    }
 }
 
